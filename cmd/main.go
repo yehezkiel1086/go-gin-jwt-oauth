@@ -41,7 +41,7 @@ func main() {
 	userHandler := handler.InitUserHandler(userSvc)
 
 	authSvc := service.InitAuthService(userRepo)
-	authHandler := handler.InitAuthHandler(authSvc)
+	authHandler := handler.InitAuthHandler(authSvc, conf.JWT)
 
 	// routing
 	r := handler.InitRouter(*userHandler, *authHandler)
