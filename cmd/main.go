@@ -40,8 +40,11 @@ func main() {
 	userSvc := service.InitUserService(userRepo)
 	userHandler := handler.InitUserHandler(userSvc)
 
+	authSvc := service.InitAuthService(userRepo)
+	authHandler := handler.InitAuthHandler(authSvc)
+
 	// routing
-	r := handler.InitRouter(*userHandler)
+	r := handler.InitRouter(*userHandler, *authHandler)
 
 	// run server
 	if err := r.Start(conf.HTTP); err != nil {

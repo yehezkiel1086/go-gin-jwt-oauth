@@ -14,3 +14,30 @@ A template of Go JWT and OAuth2 implementation built with Gin framework and Hexa
 2. Compose up: `docker compose up -d`
 3. Run: `go run cmd/main.go`
 
+## Features
+
+1. JWT Login API
+2. OAuth Login API
+3. Employees CRUD API
+4. RBAC (user, admin)
+
+## API Endpoints
+
+- POST `/api/v1/register`
+
+  ```json
+  {
+    "email": "email@example.com",
+    "password": "password"
+  }
+  ```
+
+- POST `/api/v1/login`
+
+  ```json
+  {
+    "email": "email@example.com",
+    "password": "password"
+  }
+  ```
+

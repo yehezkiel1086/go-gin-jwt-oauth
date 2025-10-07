@@ -13,6 +13,7 @@ type Router struct {
 
 func InitRouter(
 	userHandler UserHandler,
+	authHandler AuthHandler,
 ) *Router {
 	r := gin.New()
 
@@ -20,6 +21,7 @@ func InitRouter(
 	pb := r.Group("/api/v1")
 
 	pb.POST("/register", userHandler.Register)
+	pb.POST("/login", authHandler.Login)
 
 	return &Router{r}
 }

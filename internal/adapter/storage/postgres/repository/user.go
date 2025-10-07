@@ -27,3 +27,13 @@ func (ur *UserRepository) CreateUser(ctx context.Context, user *domain.User) (*d
 	return user, nil
 }
 
+func (ur *UserRepository) GetUserByEmail(ctx context.Context, email string) (*domain.User, error) {
+	db := ur.db.GetDB()
+
+	var user *domain.User
+	if err := db.First(&user, "email = ?", email).Error; err != nil {
+		return &domain.User{}, err
+	}
+
+	return user, nil
+}
