@@ -51,7 +51,6 @@ func (ah *AuthHandler) Login(c *gin.Context) {
 	}
 
 	// handle jwt
-
 	// convert token duration to int
 	duration, err := strconv.Atoi(ah.conf.Duration)
 	if err != nil {

@@ -30,7 +30,7 @@ func main() {
 	fmt.Println("✅ postgres db initialized successfully")
 
 	// migrate dbs
-	if err := db.MigrateDB(&domain.User{}); err != nil {
+	if err := db.MigrateDB(&domain.User{}, &domain.Employee{}); err != nil {
 		panic(err)
 	}
 	fmt.Println("✅ dbs migrated successfully")
@@ -43,8 +43,12 @@ func main() {
 	authSvc := service.InitAuthService(userRepo)
 	authHandler := handler.InitAuthHandler(authSvc, conf.JWT)
 
+	empRepo := repository.InitEmployeeRepository(db)
+	empSvc := service.InitEmployeeService(empRepo)
+	empHandler := handler.InitEmployeeHandler(empSvc)
+
 	// routing
-	r := handler.InitRouter(*userHandler, *authHandler)
+	r := handler.InitRouter(*userHandler, *authHandler, *empHandler)
 
 	// run server
 	if err := r.Start(conf.HTTP); err != nil {
